@@ -988,42 +988,127 @@
       .ugc-cols     { grid-template-columns: 1fr; gap: 48px; }
     }
 
-    @media (max-width: 860px) {
-      #nav { padding: 20px 28px; }
-      #nav.stuck { padding: 14px 28px; }
-      .nav-links { display: none; }
-      #ham { display: flex; }
+    @media (max-width: 768px) {
+      /* ── 1. Hide custom cursor on touch ── */
+      #cur-dot, #cur-ring { display: none !important; }
 
-      #hero { padding: 0 28px; }
-      .hero-body { padding-top: 110px; max-width: 100%; }
+      /* ── 2. Global overflow guard ── */
+      body { overflow-x: hidden; }
+      * { max-width: 100%; box-sizing: border-box; }
+
+      /* ── Nav ── */
+      #nav { padding: 18px 24px; z-index: 600; }
+      #nav.stuck { padding: 14px 24px; }
+      .nav-links { display: none; }
+      #ham { display: flex; position: relative; z-index: 601; }
+      #mob-menu { z-index: 599; }
+
+      /* ── Hero: image banner on top, text stacked below ── */
+      #hero {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+        min-height: 100vh;
+        justify-content: flex-start;
+      }
       .hero-photo {
-        position: absolute; top: 0; right: -20px;
-        width: 100%; height: 65vh; border-radius: 0;
+        position: relative;
+        order: -1;
+        top: auto; right: auto;
+        transform: none !important;
+        animation: none !important;
+        opacity: 1 !important;
+        width: 100%;
+        height: 320px;
+        border-radius: 0;
+        flex-shrink: 0;
       }
       .hero-photo::after {
-        background: linear-gradient(to top, #0A0A0A 28%, transparent 72%);
+        background: linear-gradient(to bottom, transparent 40%, #0A0A0A 100%);
         border-radius: 0;
       }
-      .hero-photo img { object-position: center 0%; filter: grayscale(20%) brightness(.65); }
-
-      .wrap { padding: 80px 28px; }
-      .builds-grid, .val-grid, .con-grid { grid-template-columns: 1fr; }
-      .content-cols { grid-template-columns: 1fr; gap: 48px; }
-      #numbers { padding: 52px 28px; }
-      .nums-grid { grid-template-columns: repeat(2,1fr); gap: 28px; }
-      .stat:not(:last-child)::after { display: none; }
-      footer { flex-direction: column; text-align: center; padding: 28px; }
-      .ugc-vid-grid { grid-template-columns: 1fr; }
-      .bcard-header-img, .airo-thumb, .raxion-thumb, .rev-thumb, .bosi-thumb, .oracle-thumb {
-        margin: -42px -28px 24px -28px;
+      .hero-photo img {
+        object-position: center top;
+        filter: none;
       }
-    }
+      .hero-body {
+        order: 1;
+        padding: 32px 24px 64px;
+        padding-top: 32px;
+        max-width: 100%;
+        position: relative;
+        z-index: 2;
+      }
+      #h-title { font-size: clamp(52px, 12vw, 72px); }
+      .hero-eyebrow { margin-bottom: 18px; }
+      .hero-ctas {
+        flex-direction: column;
+        margin-bottom: 32px;
+      }
+      .btn-p, .btn-s {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 0;
+      }
+      .hero-socials { margin-top: 24px; }
+      .hero-socials svg { width: 20px; height: 20px; }
 
-    @media (max-width: 520px) {
-      .hero-ctas { flex-direction: column; }
-      .btn-p, .btn-s { justify-content: center; }
-      .nums-grid { grid-template-columns: repeat(2,1fr); }
+      /* ── Numbers bar ── */
+      #numbers { padding: 48px 24px; }
+      .nums-grid { grid-template-columns: repeat(2,1fr); gap: 20px; }
+      .stat:not(:last-child)::after { display: none; }
+      .stat-n { font-size: 1.8rem; }
+      .stat-l { font-size: 0.7rem; }
+
+      /* ── Section wrapper ── */
+      .wrap { padding: 60px 24px; }
+      .sec-h { font-size: clamp(2rem, 8vw, 3rem); }
+
+      /* ── Builds grid ── */
+      .builds-grid { grid-template-columns: 1fr; }
+      .bcard { padding: 20px; }
+      .bcard-header-img,
+      .airo-thumb, .raxion-thumb,
+      .rev-thumb, .bosi-thumb, .oracle-thumb {
+        margin: -20px -20px 20px -20px;
+        height: 180px;
+      }
+      /* Ensure ticker parents don't overflow */
+      .raxion-ticker-bar,
+      .roco-ticker-wrap { overflow: hidden; }
+
+      /* ── UGC section ── */
+      .ugc-cols { grid-template-columns: 1fr; gap: 40px; }
+      .ugc-vid-grid { grid-template-columns: 1fr; }
+      .ugc-vid-wrap { max-height: 500px; }
+
+      /* ── Content / Platforms ── */
+      .content-cols { grid-template-columns: 1fr; gap: 40px; }
+
+      /* ── Free Value cards ── */
+      .val-grid { grid-template-columns: 1fr !important; }
+      .val-card { padding: 24px; }
+      .val-ico { font-size: 2rem; margin-bottom: 12px; }
+      .val-title { font-size: 1.3rem; }
+      .val-desc { font-size: 0.95rem; line-height: 1.6; }
+      .val-btn { display: inline-block; margin-top: 16px; }
+
+      /* ── SEO ── */
       .seo-metrics { gap: 28px; }
+
+      /* ── Contact ── */
+      .con-grid { grid-template-columns: 1fr; }
+
+      /* ── Footer ── */
+      footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 28px 24px;
+        gap: 14px;
+      }
+      .ft-socials { justify-content: center; }
+      .ft-copy { font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -1688,41 +1773,43 @@
      JAVASCRIPT
 ══════════════════════════════════════════ -->
 <script>
-/* ── Custom Cursor ── */
-const dot  = document.getElementById('cur-dot');
-const ring = document.getElementById('cur-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
+/* ── Custom Cursor (pointer devices only) ── */
+if (window.matchMedia('(pointer: fine)').matches) {
+  const dot  = document.getElementById('cur-dot');
+  const ring = document.getElementById('cur-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  dot.style.left = mx + 'px';
-  dot.style.top  = my + 'px';
-});
-
-(function tick() {
-  rx += (mx - rx) * .11;
-  ry += (my - ry) * .11;
-  ring.style.left = rx + 'px';
-  ring.style.top  = ry + 'px';
-  requestAnimationFrame(tick);
-})();
-
-document.querySelectorAll('a, button, .t-pill, .srv-pill, .val-card').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    ring.style.width  = '58px';
-    ring.style.height = '58px';
-    ring.style.borderColor = 'rgba(212,164,76,.75)';
-    dot.style.width  = '5px';
-    dot.style.height = '5px';
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
   });
-  el.addEventListener('mouseleave', () => {
-    ring.style.width  = '40px';
-    ring.style.height = '40px';
-    ring.style.borderColor = 'rgba(212,164,76,.45)';
-    dot.style.width  = '8px';
-    dot.style.height = '8px';
+
+  (function tick() {
+    rx += (mx - rx) * .11;
+    ry += (my - ry) * .11;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
+
+  document.querySelectorAll('a, button, .t-pill, .srv-pill, .val-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width  = '58px';
+      ring.style.height = '58px';
+      ring.style.borderColor = 'rgba(212,164,76,.75)';
+      dot.style.width  = '5px';
+      dot.style.height = '5px';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width  = '40px';
+      ring.style.height = '40px';
+      ring.style.borderColor = 'rgba(212,164,76,.45)';
+      dot.style.width  = '8px';
+      dot.style.height = '8px';
+    });
   });
-});
+}
 
 /* ── Hero Title — Two-Line Letter Split ── */
 (function splitTitle() {
@@ -1996,6 +2083,16 @@ document.querySelectorAll('.ugc-vid-wrap[data-vid]').forEach(wrap => {
     }
   });
 });
+
+/* ── UGC Mobile Autoplay ── */
+if ('ontouchstart' in window) {
+  document.querySelectorAll('.ugc-vid-wrap video').forEach(v => {
+    v.setAttribute('autoplay', '');
+    v.setAttribute('muted', '');
+    v.setAttribute('playsinline', '');
+    v.play().catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
